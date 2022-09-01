@@ -5,6 +5,7 @@
     <title>Laravel 8 CRUD Tutorial From Scratch</title>
  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
  
@@ -35,6 +36,9 @@
             <th>Company Address</th>
             <th width="280px">Action</th>
         </tr>
+        @if((count($companies))==0)
+       <h1>No Results Found</h1>
+       @else
         @foreach ($companies as $company)
         <tr>
             <td>{{ $company->id }}</td>
@@ -50,14 +54,37 @@
                     @method('DELETE')
                     @csrf
        
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger show_confirm">Delete</button>
                 </form>
             </td>
         </tr>
         @endforeach
+        @endif
     </table>
    
     {!! $companies->links() !!}
  
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script type="text/javascript">
+ 
+     $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+        //   var name = $(this).data("name");
+          event.preventDefault();
+          swal({
+              title: `Are you sure you want to delete this record?`,
+              text: "If you delete this, it will be gone forever.",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+  
+</script>
 </html>
