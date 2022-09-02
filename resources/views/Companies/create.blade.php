@@ -5,6 +5,13 @@
     <title>Add Company Form - Laravel 8 CRUD</title>
  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+    <style>
+        body {
+
+                background-color: #C2CAD0;
+
+            }
+    </style>
 </head>
 <body>
  
